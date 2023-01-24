@@ -1,8 +1,9 @@
+require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 const app = express();
-
+// this is api
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -13,7 +14,7 @@ app.get("/", function(req, res) {
 })
 
 mailchimp.setConfig({
-  apiKey: "eeaf5104ff5ef9c84a1503632210e592-us14",
+  apiKey: process.env.APIKEY,
   server: "us14",
 });
 
@@ -36,6 +37,6 @@ app.post("/failure", function(req, res) {
 })
 
 
-app.listen(4000, function() {
+app.listen(process.env.PORT, function() {
   console.log("Server tuned at port 4000");
 })
